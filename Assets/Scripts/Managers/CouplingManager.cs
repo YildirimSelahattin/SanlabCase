@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class CouplingManager : Singleton<CouplingManager>
 {
@@ -9,7 +10,8 @@ public class CouplingManager : Singleton<CouplingManager>
     private int placedPartCount = 0;
     public Material correctMat;
     public Material incorrectMat;
-    private GameObject pistonPartParent;
+    public GameObject pistonPartParent;
+    private int totalPartCount;
 
     public int PlacedPartCount
     {
@@ -17,11 +19,16 @@ public class CouplingManager : Singleton<CouplingManager>
         set
         {
             placedPartCount = value;
-            if (placedPartCount >= pistonPartParent.transform.childCount - 2)
+            if (placedPartCount >= totalPartCount - 1)
             {
                 UpdateMontageStatus(true);
             }
         }
+    }
+
+    void Start()
+    {
+        totalPartCount = pistonPartParent.transform.childCount;
     }
 
     public void UpdateMontageStatus(bool montageCompleted)

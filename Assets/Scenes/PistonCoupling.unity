@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctMat: {fileID: 2100000, guid: 65a7bfbc51a58fa4f98c61d1aaca68ea, type: 2}
   incorrectMat: {fileID: 2100000, guid: 445ca8a3cdc782745974acc361244b5a, type: 2}
+  pistonPartParent: {fileID: 1925795001}
 --- !u!1 &166810036
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +305,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166810036}
   m_CullTransparentMesh: 1
+--- !u!4 &693152412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 399446421463924254, guid: c6f8033639664d44abb68997225ecaa3, type: 3}
+  m_PrefabInstance: {fileID: 399446420814877826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensivity: 3
-  target: {fileID: 0}
+  target: {fileID: 693152412}
   distanceFromTarget: 3
   zoom: 10
 --- !u!1 &1252174519
@@ -914,6 +920,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759208517}
   m_CullTransparentMesh: 1
+--- !u!1 &1925795001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 399446420516608059, guid: c6f8033639664d44abb68997225ecaa3, type: 3}
+  m_PrefabInstance: {fileID: 399446420814877826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1989535830
 GameObject:
   m_ObjectHideFlags: 0

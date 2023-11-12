@@ -131,6 +131,8 @@ MonoBehaviour:
   insertable: 1
   nextEnabledParts:
   - {fileID: 4158216675899076998}
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &399446420005705094
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,7 +818,6 @@ Transform:
   - {fileID: 3138298953663801161}
   - {fileID: 809272878880130601}
   - {fileID: 6261628879936210421}
-  - {fileID: 399446421463924254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -936,7 +937,7 @@ Transform:
   - {fileID: 399446420039190099}
   - {fileID: 399446421021719615}
   m_Father: {fileID: 5191587098903461578}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 15.363, z: 0}
 --- !u!1 &399446420737880897
 GameObject:
@@ -1399,13 +1400,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399446421463924249}
-  m_LocalRotation: {x: -0, y: -0.00000002235174, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01786666, y: 0.78649116, z: 0.010094404}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70076174, y: -0.094515234, z: -0.094515264, w: 0.7007616}
+  m_LocalPosition: {x: -0.00004000005, y: 0, z: -0.0013820004}
+  m_LocalScale: {x: 0.0019999996, y: 0.0019999996, z: 0.0019999994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 399446420516608056}
-  m_RootOrder: 10
+  m_Father: {fileID: 5191587098903461578}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399446421584702848
 GameObject:
@@ -1683,6 +1684,8 @@ MonoBehaviour:
   targetTransform: {fileID: 399446420459434539}
   insertable: 0
   nextEnabledParts: []
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &3663093775077586581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,6 +1816,8 @@ MonoBehaviour:
   targetTransform: {fileID: 399446420737880902}
   insertable: 0
   nextEnabledParts: []
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4158216675899076998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1945,6 +1950,8 @@ MonoBehaviour:
   nextEnabledParts:
   - {fileID: 3663093775077586581}
   - {fileID: 3513571490800863720}
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4279702003459132084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,6 +2084,8 @@ MonoBehaviour:
   nextEnabledParts:
   - {fileID: 4854217206752440494}
   - {fileID: 4983191731653970827}
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4854217206752440494
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,6 +2216,8 @@ MonoBehaviour:
   targetTransform: {fileID: 399446421177775134}
   insertable: 0
   nextEnabledParts: []
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4983191731653970827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,6 +2348,8 @@ MonoBehaviour:
   targetTransform: {fileID: 399446420248020071}
   insertable: 0
   nextEnabledParts: []
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &6089797358945353286
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2485,8 @@ MonoBehaviour:
   insertable: 1
   nextEnabledParts:
   - {fileID: 4279702003459132084}
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &7894540833264841801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,6 +2618,8 @@ MonoBehaviour:
   targetTransform: {fileID: 399446420005705095}
   insertable: 1
   nextEnabledParts: []
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &8141730499255688799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2653,7 @@ Transform:
   m_LocalScale: {x: 500.00006, y: 500.00006, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 399446421463924254}
   - {fileID: 399446420651957829}
   m_Father: {fileID: 399446420516608056}
   m_RootOrder: 3
@@ -2734,3 +2752,5 @@ MonoBehaviour:
   targetTransform: {fileID: 5191587098903461578}
   insertable: 1
   nextEnabledParts: []
+  inSide: 0
+  startPos: {x: 0, y: 0, z: 0}
