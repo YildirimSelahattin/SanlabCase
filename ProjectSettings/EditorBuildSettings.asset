@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PistonCoupling.unity
+    guid: 29dac2e00e91eed47ac3f379aedaf041
   m_configObjects: {}
