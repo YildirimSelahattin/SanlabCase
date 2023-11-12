@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 9d60f6c3935bc2a44a4af64a392d3057
+guid: 42768cd97dc0fab4fb944768a702d271
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Piston
-    second: {fileID: 2100000, guid: 75d54dffb54b0324d9e7491d7ade5759, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
