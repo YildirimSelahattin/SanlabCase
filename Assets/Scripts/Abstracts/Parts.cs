@@ -1,29 +1,26 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
 public abstract class Parts : MonoBehaviour
 {
-    [SerializeField]
-    private float rotateSensivity = .5f;
     public Transform targetTransform;
-
-    [SerializeField] private int montageNumber;
-    private Vector2 turn;
     private bool inSide = false;
     private Vector3 mOffSet;
-    private float mZCoord;
+    private float mouseZ;
     private Transform startParent;
     private Vector3 startPos;
+    [SerializeField] private bool insertable;
+    public List<GameObject> nextEnabledParts;
     public Transform StartParent => startParent;
 
-    private void Awake()
+    private void Start()
     {
-        CouplingManager.Instance.MontageStarted += OnMontageStarted;
+        CouplingManager.Instance.AssemblyStarted += OnMontageStarted;
+        SetBaseTransform();
     }
 
-    private void Start()
+    void SetBaseTransform()
     {
         startParent = transform.parent;
         startPos = transform.position;
@@ -31,22 +28,13 @@ public abstract class Parts : MonoBehaviour
 
     private void OnMouseDown()
     {
-        mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+        mouseZ = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         mOffSet = gameObject.transform.position - GetMouseWorldPos();
+
         if (transform.parent == targetTransform)
         {
-
-            if (montageNumber % 10 == 0 && CouplingManager.Instance.LastBMontagePartsCount > montageNumber)
-            {
-                CouplingManager.Instance.LastBMontagePartsCount = montageNumber - 10;
-                Debug.Log("%10'a");
-            }
-            else if (CouplingManager.Instance.LastAMontagePartsCount > montageNumber)
-            {
-                CouplingManager.Instance.LastAMontagePartsCount = montageNumber - 1;
-            }
             transform.parent = startParent;
-            CouplingManager.Instance.CurrentMontageCount--;
+            CouplingManager.Instance.PlacedPartCount--;
             inSide = false;
         }
     }
@@ -60,11 +48,24 @@ public abstract class Parts : MonoBehaviour
     {
         if (inSide)
         {
+            foreach (var nextPart in nextEnabledParts)
+            {
+                Parts partsComponent = nextPart.GetComponent<Parts>();
+                if (partsComponent != null)
+                {
+                    partsComponent.insertable = true;
+                }
+                RodBoltController RrodBoltComponent = nextPart.GetComponent<RodBoltController>();
+                if (RrodBoltComponent != null)
+                {
+                    RrodBoltComponent.insertable = true;
+                }
+            }
             targetTransform.GetComponent<BoxCollider>().enabled = false;
             MoveTargetWithAnimation();
             targetTransform.GetChild(0).gameObject.SetActive(false);
             inSide = false;
-            CouplingManager.Instance.CurrentMontageCount++;
+            CouplingManager.Instance.PlacedPartCount++;
         }
         else
         {
@@ -75,15 +76,8 @@ public abstract class Parts : MonoBehaviour
     private Vector3 GetMouseWorldPos()
     {
         Vector3 mousePoint = Input.mousePosition;
-        mousePoint.z = mZCoord;
+        mousePoint.z = mouseZ;
         return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
-
-    public void RotateByMouse()
-    {
-        turn.x += Input.GetAxis("Mouse X") * rotateSensivity;
-        turn.y += Input.GetAxis("Mouse Y") * rotateSensivity;
-        transform.localRotation = Quaternion.Euler(turn.y, -turn.x, 0);
     }
 
     public virtual void MoveTargetWithAnimation()
@@ -96,37 +90,17 @@ public abstract class Parts : MonoBehaviour
     {
         if (other.gameObject.name == targetTransform.name && transform.parent != targetTransform)
         {
-            if (montageNumber % 10 == 0)
+            if (insertable == true)
             {
-                if (montageNumber <= CouplingManager.Instance.LastBMontagePartsCount || montageNumber == CouplingManager.Instance.LastBMontagePartsCount + 10)
-                {
-                    other.transform.GetChild(0).gameObject.SetActive(true);
-                    other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.correctMat;
-                    CouplingManager.Instance.LastBMontagePartsCount = montageNumber;
-                    inSide = true;
-                }
-                else
-                {
-                    other.transform.GetChild(0).gameObject.SetActive(true);
-                    other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.incorrectMat;
-                    inSide = false;
-                }
+                other.transform.GetChild(0).gameObject.SetActive(true);
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.correctMat;
+                inSide = true;
             }
             else
             {
-                if (montageNumber <= CouplingManager.Instance.LastAMontagePartsCount || montageNumber == CouplingManager.Instance.LastAMontagePartsCount + 1)
-                {
-                    other.transform.GetChild(0).gameObject.SetActive(true);
-                    other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.correctMat;
-                    CouplingManager.Instance.LastAMontagePartsCount = montageNumber;
-                    inSide = true;
-                }
-                else
-                {
-                    other.transform.GetChild(0).gameObject.SetActive(true);
-                    other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.incorrectMat;
-                    inSide = false;
-                }
+                other.transform.GetChild(0).gameObject.SetActive(true);
+                other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.incorrectMat;
+                inSide = false;
             }
         }
     }
@@ -136,7 +110,7 @@ public abstract class Parts : MonoBehaviour
         if (other.gameObject.name == targetTransform.name)
         {
             other.transform.GetChild(0).gameObject.SetActive(false);
-            other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material =  CouplingManager.Instance.correctMat;
+            other.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material = CouplingManager.Instance.correctMat;
             inSide = false;
         }
     }

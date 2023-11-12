@@ -1,27 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class CouplingManager : Singleton<CouplingManager>
 {
-    public event Action MontageCompleted;
-    public event Action MontageStarted;
-    private int currentMontageCount = 0;
-    private int lastAMontagePartsCount = 1;
-    private int lastBMontagePartsCount = 0;
+    public event Action AssemblyCompleted;
+    public event Action AssemblyStarted;
+    private int placedPartCount = 0;
     public Material correctMat;
     public Material incorrectMat;
+    private GameObject pistonPartParent;
 
-    public int LastAMontagePartsCount { get { return lastAMontagePartsCount; } set { lastAMontagePartsCount = value; } }
-    public int LastBMontagePartsCount { get { return lastBMontagePartsCount; } set { lastBMontagePartsCount = value; } }
-    public int CurrentMontageCount
+    public int PlacedPartCount
     {
-        get { return currentMontageCount; }
+        get { return placedPartCount; }
         set
         {
-            currentMontageCount = value;
-            if (currentMontageCount >= 9)
+            placedPartCount = value;
+            if (placedPartCount >= pistonPartParent.transform.childCount - 2)
             {
                 UpdateMontageStatus(true);
             }
@@ -30,13 +26,13 @@ public class CouplingManager : Singleton<CouplingManager>
 
     public void UpdateMontageStatus(bool montageCompleted)
     {
-        if (montageCompleted == true)
+         if (montageCompleted == true)
         {
-            MontageCompleted?.Invoke();
+            AssemblyCompleted?.Invoke();
         }
         else
         {
-            MontageStarted?.Invoke();
+            AssemblyStarted?.Invoke();
         }
     }
 }
